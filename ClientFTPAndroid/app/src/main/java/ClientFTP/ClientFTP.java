@@ -34,61 +34,158 @@ public class ClientFTP extends Observable implements Observer{
     }
 
 
-    public void Deconnexion() throws Exception {
-        this.socketControl.deconnexion();
+    public void Deconnexion() {
+
+        try
+        {
+            this.socketControl.deconnexion();
+        }
+        catch(IOException e)
+        {
+            this.exceptonGenere(e.getMessage());
+        } catch (Exception e1) {
+            this.exceptonGenere(e1.getMessage());
+        }
     }
 
-    public void Connexion() throws IOException {
-        this.socketControl.CheckServeurPret();
+    public void Connexion() {
+        try
+        {
+            this.socketControl.CheckServeurPret();
+
+        }
+        catch(IOException e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    public void AjouterFichier(String file) throws Exception {
-        this.setPath(file);
-        this.socketControl.ajouterFichier(file);
+    public void AjouterFichier(String file) {
+        try
+        {
+            this.path = file;
+            this.socketControl.ajouterFichier(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    public void AjouterFichier(String file,String newFileName) throws Exception {
+    public void AjouterFichier(String file,String newFileName) {
 
-        this.socketControl.ajouterFichier(file,newFileName);
+        try
+        {
+            this.socketControl.ajouterFichier(file,newFileName);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
+
     }
 
-    public void AnnulerTransfer(String file) throws Exception {
-        this.socketControl.AnnulerTransfer(file);
+    public void AnnulerTransfer(String file){
+        try
+        {
+            this.socketControl.AnnulerTransfer(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    public void OuvrirDossier(String file) throws Exception {
-        this.socketControl.OuvrirDossier(file);
+    public void OuvrirDossier(String file){
+        try
+        {
+            this.socketControl.OuvrirDossier(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
+
+
     }
 
 
-    protected void supprimerFichier(String file) throws Exception {
-        this.socketControl.supprimerFichier(file);
+    protected void supprimerFichier(String file){
+        try {
+            this.socketControl.supprimerFichier(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
 
-    protected void informationFichier(String file) throws Exception {
-        this.socketControl.informationFichier(file);
+    protected void informationFichier(String file){
+        try {
+            this.socketControl.informationFichier(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    protected void creerRepertoire(String file) throws Exception {
-        this.socketControl.creerRepertoire(file);
+    protected void creerRepertoire(String file){
+
+        try {
+            this.socketControl.creerRepertoire(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
 
-    protected void lister() throws Exception {
-        this.socketControl.lister();
+    protected void lister(){
+
+        try {
+            this.socketControl.lister();
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    protected void noOperation() throws Exception {
-        this.socketControl.noOperation();
+    protected void noOperation(){
+        try {
+            this.socketControl.noOperation();
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    protected void AuthentificationUser() throws  Exception{
-        this.socketControl.SendUser(this.paramFTP);
+    protected void AuthentificationUser(){
+
+        try {
+            this.socketControl.SendUser(this.paramFTP);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    protected void AuthentificationPwd() throws  Exception{
-        this.socketControl.sendPwd(this.paramFTP);
+    protected void AuthentificationPwd(){
+
+        try
+        {
+            this.socketControl.sendPwd(this.paramFTP);
+        }
+        catch (Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
+
     }
 
    /* protected void ModePassif()
@@ -97,24 +194,51 @@ public class ClientFTP extends Observable implements Observer{
     }
     */
 
-    protected void avoirCheminRepertoire() throws Exception {
+    protected void avoirCheminRepertoire(){
 
-        this.socketControl.avoirCheminRepertoire();
+        try {
+            this.socketControl.avoirCheminRepertoire();
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
 
-    protected void RecupererFichier(String file) throws Exception {
+    protected void RecupererFichier(String file){
+        try
+        {
+            this.socketControl.RecupererFichier(file);
+        }
+        catch (Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
 
-        this.socketControl.RecupererFichier(file);
     }
 
 
-    protected void SupprimerDossier(String dossier) throws Exception {
-       this.socketControl.SupprimerDossier(dossier);
+    protected void SupprimerDossier(String dossier){
+        try {
+            this.socketControl.SupprimerDossier(dossier);
+        }
+        catch (Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
     }
 
-    protected void RenommerFichier(String file) throws Exception {
-       this.socketControl.RenommerFichier(file);
+    protected void RenommerFichier(String file){
+        try
+        {
+            this.socketControl.RenommerFichier(file);
+        }
+        catch(Exception e)
+        {
+            this.exceptonGenere(e.getMessage());
+        }
+
     }
 
     protected void exceptonGenere(String text)
@@ -141,95 +265,73 @@ public class ClientFTP extends Observable implements Observer{
 
 
                         case AnnulerTransfer :
-                            try {
+
                                 this.setChanged(((FTPEnum)o));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                               this.exceptonGenere(e.getMessage());
-
-
-                            }
 
                             break;
 
                         case AjouterFichier :
-                            try {
-                                this.socketDonnee.sendFileToFTP(this.getPath());
+                                try {
+                                    this.socketDonnee.sendFileToFTP(this.getPath());
+                                }
+                                catch(Exception e)
+                                {
+                                    this.exceptonGenere(e.getMessage());
+                                }
                                 this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-                            }
+
                             break;
 
                         case OuvrirDossier :
-                            try {
+
                                 this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-                            }
+
                             break;
 
                         case SupprimerFichier :
-                            try {
-                                this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.lister();
+
                             break;
 
                         case InformationFichier :
-                            try {
-                                this.informationFichier(this.getPath());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.informationFichier(this.getPath());
                             break;
 
                         case CreerRepertoire:
-                            try {
-                                this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.lister();
                             break;
 
                         case Lister :
                             try {
-                                this.content=this.socketDonnee.read(((FTPEnum)o));
-                                this.setChanged( ((FTPEnum)o) );
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
+                                this.content = this.socketDonnee.read(((FTPEnum) o));
                             }
+                            catch (Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+
+                            this.setChanged( ((FTPEnum)o) );
+
                             break;
 
                         case Noop :
-                            try {
-                                this.setChanged( ((FTPEnum)o));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.setChanged( ((FTPEnum)o));
+
                             break;
 
                         case AuthentificationPassword:
                             try {
                                 this.socketControl.sendPwd(this.paramFTP);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
                             }
+                            catch(Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+
                             break;
 
                         case ModePassif :
@@ -245,13 +347,14 @@ public class ClientFTP extends Observable implements Observer{
                         case AvoirCheminRepertoire :
 
                             try {
-                                this.content=this.socketDonnee.read( ((FTPEnum)o) );
-                                this.setChanged(((FTPEnum)o));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
+                                this.content = this.socketDonnee.read(((FTPEnum) o));
                             }
+                            catch(Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+                                this.setChanged(((FTPEnum)o));
+
 
 
                             break;
@@ -261,92 +364,80 @@ public class ClientFTP extends Observable implements Observer{
                         case RecupererFichier:
 
                             try {
-                                content =this.socketDonnee.getFileFromFTP(this.getPath());
-                                this.setChanged(((FTPEnum)o));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
+                                content = this.socketDonnee.getFileFromFTP(this.getPath());
                             }
+                            catch(Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+                                this.setChanged(((FTPEnum)o));
+
                             break;
 
 
 
                         case SupprimerDossier :
-                            try {
-                                this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.lister();
+
                             break;
 
                         case RenommerFichier :
 
-                            try {
-                                this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.lister();
+
                             break;
 
                         case AuthentificationUser:
 
-                            try {
-                                this.AuthentificationPwd();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.AuthentificationPwd();
+
 
                             break;
 
                         case ServeurPret :
-                            try {
-                                this.AuthentificationUser();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
 
-                            }
+                                this.AuthentificationUser();
+
                             break;
 
                         case DemandeMotDePasse :
-                            try {
-                                this.socketControl.setChanged(FTPEnum.Connecte);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
+                               try {
+                                   this.socketControl.setChanged(FTPEnum.Connecte);
+                               }
+                               catch(Exception e)
+                               {
+                                   this.exceptonGenere(e.getMessage());
+                               }
 
-                            }
                             break;
 
 
                         case Deconnexion :
                             try {
                                 this.socketDonnee.deconnexion();
-                                this.setChanged(FTPEnum.Deconnexion);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
                             }
+                            catch(Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+                                this.setChanged(FTPEnum.Deconnexion);
+
 
                             break;
 
                         case Connecte :
                             try {
                                 this.socketDonnee = new SocketDonnee(this.paramFTP);
-                                this.lister();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                this.exceptonGenere(e.getMessage());
-
                             }
+                            catch (Exception e)
+                            {
+                                this.exceptonGenere(e.getMessage());
+                            }
+                                this.lister();
+
                             break;
                         case Exception:
                             this.exceptonGenere("Exception generée");
@@ -360,7 +451,7 @@ public class ClientFTP extends Observable implements Observer{
 
     }
 
-    protected void setChanged(FTPEnum ftpEnum) throws Exception {
+    protected void setChanged(FTPEnum ftpEnum) {
 
         FTPEnum[] tabFTPEnum= FTPEnum.values();
         int i = 0;
@@ -378,7 +469,7 @@ public class ClientFTP extends Observable implements Observer{
         }
         else
         {
-            throw new Exception("Etat inconnue : "+ftpEnum.getEtat());
+            this.exceptonGenere("Etat inconnue : "+ftpEnum.getEtat());
         }
     }
 

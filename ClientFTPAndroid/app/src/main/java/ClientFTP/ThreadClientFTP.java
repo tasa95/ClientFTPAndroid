@@ -9,7 +9,7 @@ import java.util.Observable;
 /**
  * Created by tasa on 31/05/2014.
  */
-public class ThreadClientFTP extends Observable implements AsyncTask {
+public class ThreadClientFTP extends  AsyncTask {
 
 
 
@@ -35,13 +35,7 @@ public class ThreadClientFTP extends Observable implements AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
 
-        try {
+
             this.clientFTP.Connexion();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("Erreur Connexion ",e.getMessage());
-            this.notifyObservers(FTPEnum.Exception + " : "+e.getMessage());
-        }
-        return null;
     }
 }
