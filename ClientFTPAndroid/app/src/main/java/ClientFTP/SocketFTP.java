@@ -12,6 +12,8 @@ import java.util.Observable;
 
 /**
  * Created by tasa on 31/05/2014.
+ *
+ * Socket générale du client FTP
  */
 public class SocketFTP extends Observable {
     private BufferedWriter out;
@@ -50,6 +52,7 @@ public class SocketFTP extends Observable {
         String line;
         if((line = this.in.readLine()) != null)
         {
+            Log.d("lecture en entrée",line);
             return line;
         }
         else
@@ -61,9 +64,10 @@ public class SocketFTP extends Observable {
     protected String readMultiplesLineTillGetParam(String text) throws IOException{
 
         String line ;
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         while((line = this.readLine()) != null && !line.equals(text))
         {
+            Log.d("lecture en entrée",line);
             buffer.append(line);
         }
         String res = buffer.toString();

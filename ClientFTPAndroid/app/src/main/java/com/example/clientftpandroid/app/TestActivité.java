@@ -1,21 +1,49 @@
 package com.example.clientftpandroid.app;
-import android.support.v7.app.ActionBarActivity;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.io.IOException;
+
+import ClientFTP.ParamFTP;
+import ClientFTP.ThreadClientFTP;
 
 
-public class MainActivity extends ActionBarActivity {
+
+
+/**
+ * Created by tasa on 02/06/2014.
+ * Vue activité
+ */
+public class TestActivité extends ActionBarActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_main);
+        setContentView(R.layout.testactivite);
+
+       Button con = (Button)findViewById(R.id.button);
+
+        con.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    ThreadClientFTP.getThread(new ParamFTP("ftp://ftp.free.fr", "", "")).getClientFTP().Connexion();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "ConnexionImpossible", Toast.LENGTH_SHORT);
+                }
+            }
+        });
 
     }
 

@@ -4,5 +4,6 @@
     <string name="app_name">ClientFTPAndroid</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="ConnexionString">Connexion</string>
 
 </resources>

@@ -1,9 +1,12 @@
 package ClientFTP;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 /**
  * Created by tasa on 31/05/2014.
+ * Socket de controle entre le client FTP et le serveur FTP
  */
 public class SocketControl extends SocketFTP {
 
@@ -107,6 +110,8 @@ public class SocketControl extends SocketFTP {
 
 
     protected void sendCmd(String line,FTPEnum ftpEnum) throws Exception {
+        Log.v("Contrôle", line);
+        Log.d("FTPEnum ", ftpEnum.getEtat());
         this.WriteLine(line);
         this.setChanged(ftpEnum);
     }
