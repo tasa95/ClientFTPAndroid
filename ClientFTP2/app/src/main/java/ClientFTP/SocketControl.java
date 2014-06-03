@@ -17,12 +17,12 @@ public class SocketControl extends SocketFTP {
     }
 
 
-   protected void CheckServeurPret() throws IOException {
+   protected void CheckServeurPret() throws Exception {
         String line = this.readMultiplesLineTillGetParam(FTPEnum.ServeurPret.getCmd());
         if(line != null && !line.contains(FTPEnum.ServeurPret.getCmd())) {
             throw new IOException("Le serveur n'est pas pret");
         }
-            this.setChanged();
+            this.setChanged(FTPEnum.ServeurPret);
             this.notifyObservers(FTPEnum.ServeurPret.getEtat());
 
     }

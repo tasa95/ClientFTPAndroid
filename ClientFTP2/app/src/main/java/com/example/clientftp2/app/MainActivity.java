@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.io.IOException;
 
+import ClientFTP.ParamFTP;
 import ClientFTP.ThreadClientFTP;
 
 
@@ -74,12 +77,16 @@ public class MainActivity extends ActionBarActivity {
 
     public void doConnexion()
     {
-        ((Button)findViewById(R.id.button)).setOnClickListener( new View.OnClickListener() {
+        ((Button)findViewById(R.id.button1)).setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                ((TextView) findViewById(R.id.host)).getText();
                 try {
-                    ThreadClientFTP.getThread( ((EditText) findViewById(R.id.host)).toString(), ((EditText) findViewById(R.id.login)).toString(), ((EditText) findViewById(R.id.pwd)).toString()).getClientFTP().Connexion();
+                    ParamFTP paramFTP = new ParamFTP(((TextView) findViewById(R.id.host)).getText().toString(), ((TextView) findViewById(R.id.login)).getText().toString(), ((TextView) findViewById(R.id.pwd)).getText().toString());
+                    ThreadClientFTP tcFTP = ThreadClientFTP.getThread(paramFTP);
+                    Log.d("wtf","wtf");
+                    tcFTP.execute("uhikhu");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("Connexion", e.getMessage());

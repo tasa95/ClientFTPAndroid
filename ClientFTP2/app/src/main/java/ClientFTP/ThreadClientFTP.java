@@ -1,6 +1,7 @@
 package ClientFTP;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -9,11 +10,11 @@ import java.io.IOException;
  * Created by tasa on 31/05/2014.
  * Thread du Client FTP
  */
-public class ThreadClientFTP extends  AsyncTask {
-
+public class ThreadClientFTP extends  AsyncTask<Object,Object ,Object > {
 
 
     protected ClientFTP clientFTP;
+    protected ParamFTP paramFTP;
     private static ThreadClientFTP thread ;
 
     public static ThreadClientFTP getThread(String login,String host,String pwd) throws IOException {
@@ -21,7 +22,7 @@ public class ThreadClientFTP extends  AsyncTask {
         if(thread == null)
         {
 
-            thread = new ThreadClientFTP(new ClientFTP(new ParamFTP(host,login,pwd )) );
+            thread = new ThreadClientFTP(new ParamFTP(host,login,pwd ) );
         }
 
         return thread;
@@ -32,7 +33,7 @@ public class ThreadClientFTP extends  AsyncTask {
         if(thread == null)
         {
 
-            thread = new ThreadClientFTP(new ClientFTP(paramFTP) );
+            thread = new ThreadClientFTP(paramFTP );
         }
 
         return thread;
@@ -40,7 +41,7 @@ public class ThreadClientFTP extends  AsyncTask {
 
     public static ThreadClientFTP getThread() throws Exception {
 
-        if(thread == null)
+        if(thread == null || thread.paramFTP == null)
         {
 
             throw new Exception(" Le processus n'a jamais été initialisé");
@@ -51,18 +52,25 @@ public class ThreadClientFTP extends  AsyncTask {
 
 
 
-    private  ThreadClientFTP(ClientFTP clientFTP) {
+    private  ThreadClientFTP(ParamFTP paramFTP) {
 
-        this.clientFTP = clientFTP;
+        this.paramFTP = paramFTP;
     }
 
     @Override
     protected Object doInBackground(Object[] objects) {
 
+        try {
+            this.clientFTP = new ClientFTP(this.paramFTP);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Connexion",e.getMessage());
+        }
 
-            this.clientFTP.Connexion();
+        thread.clientFTP.Connexion();
         return null;
     }
+
 
     public ClientFTP getClientFTP()
     {
