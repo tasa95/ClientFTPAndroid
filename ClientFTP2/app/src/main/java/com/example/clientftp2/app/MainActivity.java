@@ -2,8 +2,18 @@ package com.example.clientftp2.app;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.IOException;
+
+import ClientFTP.ThreadClientFTP;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -11,7 +21,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_main);
+
+
+        this.Anonyme();
+        this.doConnexion();
+
+
+
     }
 
 
@@ -32,5 +49,46 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Anonyme()
+    {
+        ((CheckBox)findViewById(R.id.anonyme)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( ( (CheckBox) findViewById(R.id.anonyme)).isChecked() )
+                {
+                    ((EditText) findViewById(R.id.login)).setEnabled(false);
+                    ((EditText) findViewById(R.id.pwd)).setEnabled(false);
+                    ((CheckBox) findViewById(R.id.anonyme)).setChecked(true);
+                }
+                else
+                {
+                    ((EditText) findViewById(R.id.login)).setEnabled(true);
+                    ((EditText) findViewById(R.id.pwd)).setEnabled(true);
+                    ((CheckBox) findViewById(R.id.anonyme)).setChecked(false);
+                }
+            }
+        });
+    }
+
+    public void doConnexion()
+    {
+        ((Button)findViewById(R.id.button)).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    ThreadClientFTP.getThread( ((EditText) findViewById(R.id.host)).toString(), ((EditText) findViewById(R.id.login)).toString(), ((EditText) findViewById(R.id.pwd)).toString()).getClientFTP().Connexion();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("Connexion", e.getMessage());
+                    Toast.makeText(getApplicationContext(),"Connexion impossible verifiez les paramétres",Toast.LENGTH_SHORT);
+
+                }
+
+            }
+        });
+
     }
 }
